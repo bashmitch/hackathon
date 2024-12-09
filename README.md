@@ -53,3 +53,29 @@ The following services are deployed as part of the project:
 - **TAK (Team Awareness Kit)**: TAK is the core of a suite of georeferenced imagery and communications tools that allow for scaled operational planning, data sharing, visualized elevation data, and target management. 
 - **ICE (Instant Connect Now)**: Stay connected with the world's leading interoperable tactical communications platform for military, government, and industry. Secure, reliable, and tailored to the specialized needs of elite teams. 
 - **Vidterra Compass**: COMPASS makes video distribution simple by using intelligent software to replace complex network routing.
+
+## Getting Started
+1. Clone this repository:
+```bash
+git clone [https://placeholder.com/donotuse](https://github.com/Spectrewolf2/Selfhost)
+cd /service folder 
+
+or
+
+cd /Automated
+```
+
+2. Navigate to the folder for the service you want to host and follow the instructions in its guide.
+3. Set up and customize your self-hosted environment to suit your needs.
+
+## Community and Contributions
+We welcome contributions! If you have suggestions for new services, improvements to existing guides, or general feedback, please open an issue or submit a pull request.
+
+
+
+## Additional Resources
+* [Ollama Documentation](https://ollama.ai/docs)
+* [Jellyfin Documentation](https://jellyfin.org/docs)
+* [Portainer] (https://www.portainer.io/)
+* [Rancher] (https://www.rancher.com/)
+* [Docker-Compose] (https://docs.docker.com/compose/)
