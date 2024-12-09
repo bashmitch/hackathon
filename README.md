@@ -37,17 +37,19 @@ This guide assumes:
 ## Services Deployed
 The following services are deployed as part of the project:
 
-- **Docker Compose**
-- **Portainer**
-- **Bookstack**
-- **Gitbucket**
-- **TAK**
-- **ICE**
-- **VidTerra Compass**
-- **Cloudflare**
-- **Ollama**
-- **Nextcloud**
-- **Jellyfin**
-- **Element**
-- **Vault**
-- **Guacamole**
+## Service Descriptions
+
+- **Docker Compose**: A tool for defining and running multi-container Docker applications using a simple YAML configuration file.  
+- **Portainer**: A lightweight management UI for Docker that simplifies container deployment and monitoring.  
+- **Bookstack**: An open-source knowledge management platform for creating and organizing documentation and wikis.  
+- **Gitbucket**: A self-hosted Git platform for version control, similar to GitHub.  
+- **Cloudflare**: A web performance and security service that protects websites and optimizes content delivery.  
+- **Ollama**: An AI platform providing tools and services for conversational AI and language processing.  
+- **Nextcloud**: A self-hosted file sharing and collaboration platform for secure and private cloud storage.  
+- **Jellyfin**: A free and open-source media server for managing and streaming digital media content.  
+- **Element**: A secure messaging and collaboration app built on the Matrix protocol for decentralized communication.  
+- **Vault**: A secrets management tool for securely storing and accessing sensitive information such as API keys, passwords, and certificates.  
+- **Guacamole**: A clientless remote desktop gateway that provides secure access to desktops and servers via a web browser.  
+- **TAK (Team Awareness Kit)**: TAK is the core of a suite of georeferenced imagery and communications tools that allow for scaled operational planning, data sharing, visualized elevation data, and target management. 
+- **ICE (Instant Connect Now)**: Stay connected with the world's leading interoperable tactical communications platform for military, government, and industry. Secure, reliable, and tailored to the specialized needs of elite teams. 
+- **Vidterra Compass**: COMPASS makes video distribution simple by using intelligent software to replace complex network routing.
