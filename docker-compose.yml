@@ -29,6 +29,7 @@ services:
       DB_USERNAME: bookstack_user
       DB_PASSWORD: strongpassword
       APP_KEY: base64:h2WGIUhzRFgZKui1QUQPzNgNa6XE3ptpmYNQ0DHDOUY=
+      APP_URL: http://localhost:8081
 
   bookstack-db:
     image: mariadb:10.5
