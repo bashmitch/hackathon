@@ -9,3 +9,9 @@
   `mkdir ./config`
 
   `touch ./config/db.sqlite`
+
+5. Create docker-compose.yaml
+
+`nano docker-compose.yaml`
+
+6. Run docker-compose file.
