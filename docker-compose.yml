@@ -2,148 +2,32 @@
 version: '3'
 
 services:
-#  piwigo:
- #   image: lscr.io/linuxserver/piwigo:latest
- #   container_name: piwigo
- #   environment:
- #     - PUID=1000
- #     - PGID=1000
- #     - TZ=Etc/UTC
- #   volumes:
- #     - /home/administrator/config:/config
- #     - /home/administrator/gallery:/gallery
- #   ports:
- #     - "80:80"
- #   restart: unless-stopped
-
- # mariadb:
- #   image: lscr.io/linuxserver/mariadb:latest
- #   container_name: mariadb
- #   environment:
- #     - PUID=1000
- #     - PGID=1000
- #     - TZ=Etc/UTC
- #     - MYSQL_ROOT_PASSWORD=Password123
- #     - MYSQL_DATABASE=piwigo_db
- #     - MYSQL_USER=testuser
- #     - MYSQL_PASSWORD=Password123
- #   volumes:
- #     - /home/administrator/docker/mariadb_config:/config
- #   ports:
- #     - "3306:3306"
- #   restart: unless-stopped
-
-#  nginx:
-#    image: lscr.io/linuxserver/nginx:latest
-#   container_name: nginx
-#    environment:
-#      - PUID=1000
-#      - PGID=1000
-#      - TZ=Etc/UTC
-#    volumes:
-#      - /home/administrator/nginx_config:/config
-#    ports:
-#      - "8280:80"
-#      - "443:443"
-#    restart: unless-stopped
-
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
+  gitbucket:
+    image: gitbucket/gitbucket:latest
+    container_name: gitbucket
     restart: unless-stopped
-    ports:
-      - "9000:9000"
-      - "9443:9443"
-     environment:
-      - OAUTH_AUTH_URL=http://<keycloak-host>:8080/realms/<realm>/protocol/openid-connect/auth
-      - OAUTH_TOKEN_URL=http://<keycloak-host>:8080/realms/<realm>/protocol/openid-connect/token
-      - OAUTH_CLIENT_ID=portainer
-      - OAUTH_CLIENT_SECRET=<client-secret>
-      - OAUTH_SCOPES="openid email profile"
-      - OAUTH_USER_IDENTIFIER="sub"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-
-
-  rancher:
-    image: rancher/rancher
-    privileged: true
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    environment:
-      CATTLE_BOOTSTRAP_PASSWORD: "Password1234"
-      
-#  wordpress:
-#    container_name: wordpress
-#    image: wordpress
-#    ports:
-#      - "8080:80"
-#    restart: always
-#    environment:
-#      WORDPRESS_DB_HOST: "wordpress-db:3306"
-#      WORDPRESS_DB_NAME: "wordpress"
-#      WORDPRESS_DB_USER: "admin"
-#      WORDPRESS_DB_PASSWORD: "password"
-#    depends_on:
-#      - wordpress-db
-
-#  wordpress-db:
-#    container_name: wordpress-db
-#    image: mysql:5.7
-#    environment:
-#      MYSQL_ROOT_PASSWORD: "password"
-#      MYSQL_DATABASE: "wordpress"
-#      MYSQL_USER: "admin"
-#      MYSQL_PASSWORD: "password"
-#    volumes:
-#      - wordpress-db:/var/lib/mysql
-#    restart: always
-
-  postgres:
-    image: postgres:15
-    container_name: keycloak-db
-    environment:
-      POSTGRES_USER: keycloakuser
-      POSTGRES_PASSWORD: P@55w0rd!
-      POSTGRES_DB: keycloakdb
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - keycloak-network
-
-  keycloak:
-    image: quay.io/keycloak/keycloak:22.0.1
-    container_name: keycloak
-    restart: always
-    environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: P@55w0rd!
-      KC_DB=postgres
-      KC_DB_URL=jdbc:postgresql://keycloak-db:5432/keycloak
-      KC_DB_USERNAME=keycloak
-      KC_DB_PASSWORD=keycloakpassword
-      KC_HOSTNAME=<keycloak-host>
-      KC_PROXY=edge
     ports:
       - "8080:8080"
-    command: start --optimized
-    depends_on:
-      - postgres
-    networks:
-      - keycloak-network
- 
+    volumes:
+      - gitbucket_data:/gitbucket
+    environment:
+      GITBUCKET_PORT: 8080
+      GITBUCKET_HOME: /gitbucket
 
-networks:
-  keycloak-network:
-
+  bookstack:
+    image: solidnerd/bookstack:latest
+    container_name: bookstack
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    volumes:
+      - bookstack_data:/var/www/bookstack
+    environment:
+      DB_HOST: db
+      DB_DATABASE: bookstack
+      DB_USERNAME: bookstack_user
+      DB_PASSWORD: strongpassword
 
 volumes:
-#  wordpress-db:
-  portainer_data:
-  postgres_data:
-  
-networks:
-  keycloak-network:
+  gitbucket_data:
+  bookstack_data:
