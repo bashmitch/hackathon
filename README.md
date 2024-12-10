@@ -43,7 +43,7 @@ The following services are deployed as part of the project:
 - **Portainer**: A lightweight management UI for Docker that simplifies container deployment and monitoring.  
 - **Bookstack**: An open-source knowledge management platform for creating and organizing documentation and wikis.  
 - **Gitbucket**: A self-hosted Git platform for version control, similar to GitHub.  
-- **Cloudflare**: A web performance and security service that protects websites and optimizes content delivery.  
+- **Keycloak**: An Identity management solution. 
 - **Ollama**: An AI platform providing tools and services for conversational AI and language processing.  
 - **Nextcloud**: A self-hosted file sharing and collaboration platform for secure and private cloud storage.  
 - **Jellyfin**: A free and open-source media server for managing and streaming digital media content.  
