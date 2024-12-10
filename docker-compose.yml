@@ -28,6 +28,7 @@ services:
       DB_DATABASE: bookstack
       DB_USERNAME: bookstack_user
       DB_PASSWORD: strongpassword
+      APP_KEY: base64:h2WGIUhzRFgZKui1QUQPzNgNa6XE3ptpmYNQ0DHDOUY=
 
   bookstack-db:
     image: mariadb:10.5
