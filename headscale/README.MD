@@ -4,4 +4,4 @@
   `mkdir -p ~/headscale && cd ~/headscale`
 4. Create empty SQlite DB in directory
   `mkdir ./config
-  touch ./config/db.sqlite'
+  touch ./config/db.sqlite`
