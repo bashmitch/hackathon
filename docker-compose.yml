@@ -23,20 +23,19 @@ services:
     environment:
       CATTLE_BOOTSTRAP_PASSWORD: "Password1234"
       
-volumes:
-#  wordpress-db:
-  portainer_data:
+   volumes:
+    portainer_data:
 
-gitbucket:
-  image: gitbucket/gitbucket:latest
-  container_name: gitbucket
-  restart: unless-stopped
-  ports:
-    - "8080:8080"
-  volumes:
-     - gitbucket_data:/gitbucket
-  environment:
-     GITBUCKET_PORT: 8080
-     GITBUCKET_HOME: /gitbucket
- Volumes:
-  gitbucket_data:
+  gitbucket:
+   image: gitbucket/gitbucket:latest
+   container_name: gitbucket
+   restart: unless-stopped
+   ports:
+     - "8080:8080"
+   volumes:
+      - gitbucket_data:/gitbucket
+   environment:
+      GITBUCKET_PORT: 8080
+      GITBUCKET_HOME: /gitbucket
+  Volumes:
+   gitbucket_data:
