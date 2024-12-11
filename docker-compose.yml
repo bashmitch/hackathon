@@ -42,6 +42,24 @@ services:
       - ./homer/config:/www/assets # Bind mount for configuration
     restart: unless-stopped # Automatically restart the container unless manually stopped
 
+  headscale:
+    image: headscale/headscale:stable
+    container_name: headscale
+    volumes:
+      - /etc/headscale/config:/etc/headscale
+      - ./container-data/data:/var/lib/headscale
+    ports:
+      - 8080:8080
+      - 9090:9090
+    command: serve
+    restart: unless-stopped
+  headscale-ui:
+    image: ghcr.io/gurucomputing/headscale-ui:latest
+    restart: unless-stopped
+    container_name: headscale-ui
+    ports:
+      - 50000:8080
+
 
 volumes:
   portainer_data:
