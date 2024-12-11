@@ -1,21 +1,19 @@
----
+version: '3.5'
 services:
   headscale:
+    image: headscale/headscale:stable
     container_name: headscale
-    image: headscale/headscale:latest
-    command: headscale serve
-    restart: unless-stopped
-    ports:
-        - 8080:8080
-        - 9090:9090
     volumes:
-        - ./config:/etc/headscale/
-        - ./data:/var/lib/headscale/
-
-  headscale-ui:
-    container_name: headscale-ui
-    image: ghcr.io/gurucomputing/headscale-ui:latest
-    pull_policy: always
-    restart: unless-stopped
+      - /etc/headscale/config:/etc/headscale
+      - ./container-data/data:/var/lib/headscale
     ports:
-        - 9080:80
+      - 8080:8080
+      - 9090:9090
+    command: serve
+    restart: unless-stopped
+  headscale-ui:
+    image: ghcr.io/gurucomputing/headscale-ui:latest
+    restart: unless-stopped
+    container_name: headscale-ui
+    ports:
+      - 50000:8080
