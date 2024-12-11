@@ -32,7 +32,19 @@ services:
     environment:
       GITBUCKET_PORT: 8080
       GITBUCKET_HOME: /gitbucket
+  
+  homer:
+    image: b4bz/homer:latest
+    container_name: homer
+    ports:
+      - "8085:8080" # Maps the container's port 8080 to the host's port 8085
+    volumes:
+      - ./homer/config:/www/assets # Bind mount for configuration
+    restart: unless-stopped # Automatically restart the container unless manually stopped
+
 
 volumes:
   portainer_data:
   gitbucket_data:
+  homer-config:
+    driver: local
