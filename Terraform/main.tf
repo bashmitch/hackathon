@@ -94,10 +94,6 @@ output "vm_names" {
 
 output "vm_ips" {
   description = "IP addresses of the created VMs"
-  value       = [for vm in harvester_virtualmachine.vm : vm.status.interfaces[0].ipAddress]
+  value       = [for vm in harvester_virtualmachine.vm : vm.network_interface[0].ip_address]
 }
 
-output "vm_statuses" {
-  description = "Statuses of the created VMs"
-  value       = [for vm in harvester_virtualmachine.vm : vm.status.phase]
-}
