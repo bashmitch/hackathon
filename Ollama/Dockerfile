@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-# Use an official Node.js image as the base image (adjust if different base is needed)
-FROM node:16-slim
-
-# Set working directory
-WORKDIR /app
-
-# Copy the package.json and package-lock.json (or equivalent) for installing dependencies
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install --production
-
-# Copy the entire application source code
-COPY . .
-
-# Set environment variables (Optional, replace with your own)
-ENV OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-'http://localhost:11434'}
-
-# Expose the port the app will run on
-EXPOSE 8080
-
-# Run the application (Replace this with the actual start command for your app)
-CMD ["npm", "start"]
-=======
 # syntax=docker/dockerfile:1
 # Initialize device type args
 # use build args in the docker build command with --build-arg="BUILDARG=true"
@@ -199,4 +174,3 @@ ENV WEBUI_BUILD_VERSION=${BUILD_HASH}
 ENV DOCKER=true
 
 CMD [ "bash", "start.sh"]
->>>>>>> 07b46c2d1d388a3d23cddfb11df42759b54c11c8
