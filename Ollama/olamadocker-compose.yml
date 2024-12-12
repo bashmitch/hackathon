@@ -1,42 +1,33 @@
-version: '3.6'
+version: '3.8'
 
 services:
   ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - /home/ollama:/root/.ollama
+    restart: unless-stopped
     deploy:
       resources:
         reservations:
           devices:
-            - driver: nvidia
-              count: 1
-              capabilities:
-                - gpu
-    volumes:
-      - ollama:/root/.ollama
-    ports:
-      - 11434:11434
-    container_name: ollama
-    pull_policy: always
-    tty: true
-    restart: unless-stopped
-    image: ollama/ollama:latest
+            - capabilities: ["gpu"]
+    # For older versions of Docker, you might need to use the environment method
+    # environment:
+    #   - NVIDIA_VISIBLE_DEVICES=all
 
-  ollama-webui:
-    build:
-      context: .
-      args:
-        OLLAMA_API_BASE_URL: '/ollama/api'
-      dockerfile: Dockerfile
-    image: ollama-webui:latest
-    container_name: ollama-webui
-    depends_on:
-      - ollama
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
     ports:
-      - 3000:8080
-    environment:
-      - "OLLAMA_API_BASE_URL=http://ollama:11434/api"
+      - "8282:8080"
     extra_hosts:
-      - host.docker.internal:host-gateway
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - open-webui:/app/backend/data
     restart: unless-stopped
 
 volumes:
-  ollama: {}
+  open-webui:
