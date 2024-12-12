@@ -1,0 +1,28 @@
+title: "Dashboard"
+subtitle: "Your Homer Dashboard"
+
+links:
+  - name: "Portainer"
+    url: "https://localhost:9443"
+    target: "_blank"
+    description: "Manage your Docker containers"
+
+  - name: "Rancher"
+    url: "https://localhost"
+    target: "_blank"
+    description: "Kubernetes Management"
+
+  - name: "GitBucket"
+    url: "http://localhost:8080"
+    target: "_blank"
+    description: "Git repositories management"
+
+  - name: "Headscale"
+    url: "http://localhost:50000"
+    target: "_blank"
+    description: "Tailscale Coordination Server"
+
+  - name: "Jellyfin"
+    url: "http://localhost:8096"
+    target: "_blank"
+    description: "Media Server"

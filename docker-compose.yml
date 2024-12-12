@@ -39,8 +39,12 @@ services:
     ports:
       - "8085:8080" # Maps the container's port 8080 to the host's port 8085
     volumes:
-      - ./homer/config:/www/assets # Bind mount for configuration
+      - ./homer/config.yml:/www/assets/config.yml:ro # Bind mount for configuration
+      - ./homer/assets:/www/assets/icons:ro # Bind mount for logos and assets
     restart: unless-stopped # Automatically restart the container unless manually stopped
+    environment:
+      TITLE: "My Dashboard"
+      SUBTITLE: "Quick Access to Services"
 
   headscale:
     image: headscale/headscale:stable
@@ -53,6 +57,7 @@ services:
       - 9090:9090
     command: serve
     restart: unless-stopped
+  
   headscale-ui:
     image: ghcr.io/gurucomputing/headscale-ui:latest
     restart: unless-stopped
@@ -63,28 +68,9 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
-   # user: uid:gid
     network_mode: 'host'
-   # volumes:
-   #   - /path/to/config:/config
-   #   - /path/to/cache:/cache
-   #   - type: bind
-   #     source: /path/to/media
-   #     target: /media
-   #   - type: bind
-   #     source: /path/to/media2
-   #     target: /media2
-   #     read_only: true
-      # Optional - extra fonts to be used during transcoding with subtitle burn-in
-   #   - type: bind
-   #     source: /path/to/fonts
-   #     target: /usr/local/share/fonts/custom
-   #     read_only: true
-   # restart: 'unless-stopped'
-    # Optional - alternative address used for autodiscovery
     environment:
       - JELLYFIN_PublishedServerUrl=http://example.com
-    # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
 
