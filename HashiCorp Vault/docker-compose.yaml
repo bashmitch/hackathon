@@ -1,0 +1,17 @@
+---
+version: '3.8'
+
+services:
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: "root"  # Development mode root token
+      VAULT_DEV_LISTEN_ADDRESS: "0.0.0.0:8200"  # Expose to all interfaces
+    cap_add:
+      - IPC_LOCK  # Prevent swapping Vault's memory to disk
+    volumes:
+      - ./vault-data:/vault/data  # Optional: Persistent storage
+    command: server -dev
