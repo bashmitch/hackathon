@@ -49,7 +49,7 @@ services:
       - /etc/headscale/config:/etc/headscale
       - ./container-data/data:/var/lib/headscale
     ports:
-      - 8080:8080
+      - 3014:8080
       - 9090:9090
     command: serve
     restart: unless-stopped
