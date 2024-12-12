@@ -57,13 +57,19 @@ services:
       - 9090:9090
     command: serve
     restart: unless-stopped
-  
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"   # Limit to 0.5 CPUs
+          memory: "512M" # Limit to 512MB RAM
+
   headscale-ui:
     image: ghcr.io/gurucomputing/headscale-ui:latest
-    restart: unless-stopped
     container_name: headscale-ui
     ports:
       - 50000:8080
+    restart: unless-stopped
+
   
   jellyfin:
     image: jellyfin/jellyfin
@@ -74,8 +80,56 @@ services:
     extra_hosts:
       - 'host.docker.internal:host-gateway'
 
+  registry:
+    image: registry:2
+    container_name: registry
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/var/lib/registry
+
+  postgresql:
+    image: postgres:16
+    hostname: postgresql # Explicit hostname for resolution
+    environment:
+      - POSTGRES_USER=keycloak
+      - POSTGRES_DB=keycloak
+      - POSTGRES_PASSWORD=SUPERsecret
+    volumes:
+      - '/home/ubuntu/docker/keycloak/postgresql_data:/var/lib/postgresql/data'
+    networks:
+      - keycloak_network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:22.0.3
+    restart: always
+    command: start
+    depends_on:
+      - postgresql
+    environment:
+      - KC_PROXY_ADDRESS_FORWARDING=true
+      - KC_HOSTNAME_STRICT=false
+      - KC_HTTP_ENABLED=true
+      - KC_DB=postgres
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=SUPERsecret
+      - KC_DB_URL_HOST=postgresql # Matches the hostname of the PostgreSQL service
+      - KC_DB_URL_PORT=5432
+      - KC_DB_URL_DATABASE=keycloak
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=password
+    ports:
+      - "3002:8080" # Expose Keycloak's HTTP port on localhost
+    networks:
+      - keycloak_network
+
+networks:
+  keycloak_network:
+    driver: bridge
+
 volumes:
   portainer_data:
   gitbucket_data:
+  postgres_data:
   homer-config:
     driver: local
