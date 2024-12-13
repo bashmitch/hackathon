@@ -19,3 +19,5 @@
 7. Run docker-compose file inside `/etc/headscale/` by using the command `sudo docker-compose up -d`
 
 https://headscale.net/stable/ref/configuration/
+
+https://headscale.net/stable/setup/install/container/
