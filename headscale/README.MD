@@ -17,3 +17,5 @@
 6. Copy the contents from this Github into your docker compose file located at `/etc/headscale/docker-compose.yaml`
 
 7. Run docker-compose file inside `/etc/headscale/` by using the command `sudo docker-compose up -d`
+
+https://headscale.net/stable/ref/configuration/
